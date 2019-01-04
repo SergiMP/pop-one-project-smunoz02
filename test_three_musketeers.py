@@ -306,6 +306,9 @@ def test_choose_computer_move():
     assert isinstance(choose_computer_move(R),tuple)
     assert isinstance(choose_computer_move(M)[0],tuple)
     assert isinstance(choose_computer_move(R)[1],str)
+    assert choose_computer_move(R)[0] in all_locations()
+    assert is_legal_move(choose_computer_move(R)[0],choose_computer_move(R)[1])
+    
     
 def test_is_enemy_win():
     '''Test that the functions returns the correct object and works in both win/not win situations.'''
