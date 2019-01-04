@@ -14,6 +14,7 @@
 
 import random
 
+
 LEFT = 'LEFT'
 RIGHT = 'RIGHT'
 UP = 'UP'
@@ -107,7 +108,7 @@ def is_legal_move_by_musketeer(location, direction):
 	if legal:
 		return True 
 	else: 
-		raise ValueError("The Musketeer can\'t perform the selected move.")
+		raise ValueError("The Musketeer can't perform the selected move.")
 		
 		
 def is_legal_move_by_enemy(location, direction):
@@ -246,7 +247,7 @@ def is_enemy_win():
 #----a bug in it before you move to stage 3
 
 def print_board():
-	print(" 1  2  3  4  5")
+	print(" 1  2  3	 4	5")
 	print("------------------")
 	ch = "A"
 	for i in range(0, 5):
@@ -279,20 +280,24 @@ def choose_users_side():
 	return user
 
 def get_users_move():
-	"""Gets a legal move from the user, and returns it as a
-	   (location, direction) tuple."""
-	directions = {'L':'left', 'R':'right', 'U':'up', 'D':'down'}
-	move = input("Your move? ").upper().replace(' ', '')
-	if (len(move) >= 3 \
-			and move[0] in 'ABCDE'
-			and move[1] in '12345'
-			and move[2] in 'LRUD'):
-		location = string_to_location(move[0:2])
-		direction = directions[move[2]]
-		if is_legal_move(location, direction):
-			return (location, direction)
-	print("Illegal move--'" + move + "'")
-	return get_users_move()
+    """Gets a legal move from the user, and returns it as a
+       (location, direction) tuple."""
+    directions = {'L': 'left', 'R': 'right', 'U': 'up', 'D': 'down'}
+    move = input("Your move? ").upper().replace(' ', '')
+    if (len(move) >= 3
+        and move[0] in 'ABCDE'
+        and move[1] in '12345'
+            and move[2] in 'LRUD'):
+        location = string_to_location(move[0:2])
+        direction = directions[move[2]]
+        try:
+            if is_legal_move(location, direction):
+                return (location, direction)
+        except ValueError:
+            print('That movement is illegal, please enter a new Location and a new direction.')
+            return get_users_move()
+    print("Illegal move--'" + move + "'")
+    return get_users_move()
 
 def move_musketeer(users_side):
 	"""Gets the Musketeer's move (from either the user or the computer)
