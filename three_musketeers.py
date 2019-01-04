@@ -246,8 +246,8 @@ def is_enemy_win():
 #----a bug in it before you move to stage 3
 
 def print_board():
-	print("	   1  2	 3	4  5")
-	print("	 ---------------")
+	print(" 1  2  3  4  5")
+	print("------------------")
 	ch = "A"
 	for i in range(0, 5):
 		print(ch, "|", end = " ")
