@@ -71,11 +71,13 @@ def test_set_board():
 
 def test_get_board():
     '''Test that the functions return an appropiated object i.e type and length'''
-    board = set_board(board1)
+    board = get_board(board1)
     assert len(board) == 5
     assert board == board1 and board != board2
     assert isinstance(board,list)
     assert type(board) != str
+    board_two = get_board(board2)
+    assert board != board_two
     
 def test_string_to_location():
     '''Test error exceptions and return values for correct input.'''
@@ -114,6 +116,7 @@ def test_all_locations():
     and that is a list. '''
     assert len(all_locations()) == 25
     assert isinstance(all_locations(),list)
+    assert type(all_locations()[0]) == tuple
     assert all_locations()[0] == (0,0)
     assert all_locations()[-1] == (4,4)
     
@@ -124,6 +127,11 @@ def test_adjacent_location():
     assert adjacent_location((0,0),RIGHT) == (0,1)
     assert adjacent_location((4,2),UP) == (3,2)
     assert adjacent_location((4,2),LEFT) == (4,1)
+    assert adjacent_location((4,2),LEFT) != (4,2)
+    assert adjacent_location((0,0),RIGHT) != (0,0)
+    assert adjacent_location((4,2),UP) != (4,2)
+    assert adjacent_location((4,2),LEFT) != (4,2)
+    
 
 def test_is_legal_move_by_musketeer():
     '''Test that both,the appropiated ValueError is raised and the legal move is returned.'''
@@ -274,6 +282,10 @@ def test_is_within_board():
 def test_all_possible_moves_for():
     '''Test that the appropiated object is returned for both players and that all possible
     movements are taken into account (uses board1)'''
+    set_board(board)
+    assert len(all_possible_moves_for((M))) == 8
+    assert len(all_possible_moves_for((R))) == 0
+    set_board(board1)
     assert isinstance(all_possible_moves_for((M)),list)
     assert len(all_possible_moves_for((M))) == 5
     assert len(all_possible_moves_for(R)) == 12 
@@ -302,5 +314,8 @@ def test_is_enemy_win():
     assert is_enemy_win() == True
     set_board(board1)
     assert is_enemy_win() == False
+    set_board(board)
+    assert is_enemy_win() == False
+    
      
 
