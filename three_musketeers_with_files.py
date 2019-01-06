@@ -236,6 +236,63 @@ def is_enemy_win():
 #----you do not need to modify code below unless you find a bug
 #----a bug in it before you move to stage 3
 
+#------Functions created for saving feature---------
+	
+def save_game():
+	global board
+	with open("saved_game.py","wb") as data:
+		pickle.dump(board,data)
+	quit()
+	
+def load_game():
+	global board
+	with open('saved_game.py','rb') as data:
+		board = pickle.load(data)
+	start()
+	
+def delete_start():
+	os.remove("saved_game.py")
+	start()
+		
+def is_file():
+	return os.path.isfile('./saved_game.py')
+
+def quit_game():
+	user_choice = {1: save_game, 2: quit}
+	print("Oh you are leaving us now?. We hope we'll see you soon.")
+	print("Would you like to: ")
+	print("1. Test if the student can create a 'save file'.")
+	print("2. Test if the student can break other things than his leg, i.e a loop.")
+	selection = input("Please select 1 to save the game or 2 to quit. ")
+	try:
+		choice = int(selection)
+	except ValueError:
+		print("Please focus and select a valid option. Try again... ")
+		return selection
+	if choice > 2:
+		print("Please focus and select a valid option. Try again... ")
+		return selection
+	return user_choice[choice]()
+	
+
+def options():
+    print("There is a saved game file available. Would you like to: ")
+    print("1. Load that game, I was on fire... ")
+    print("2. I need a fresh start in my life, delete it and load a new game. ")
+    print("3. Ask me again next time, just start a new game for now. ")
+    choice = input("Please select one option: 1 2 3  ")
+    try:
+        return int(choice)
+    except ValueError:
+        print('That is not a valid option. Please try again. ')
+        return choice
+        
+def choice(choices):
+	selected = {1: load_game ,2: delete_start ,3: start}
+	return selected[choices]()
+
+#-------------------------------------------------------------#
+
 def print_board():
 	print("    1  2  3  4	5")
 	print("------------------")
@@ -336,65 +393,9 @@ def describe_move(who, location, direction):
 		  location_to_string(location), 'to',\
 		  location_to_string(new_location) + ".\n")
 
-	
-def save_game():
-	global board
-	with open("saved_game.py","wb") as data:
-		pickle.dump(board,data)
-	quit()
-	
-def load_game():
-	global board
-	with open('saved_game.py','rb') as data:
-		board = pickle.load(data)
-	start()
-	
-def delete_start():
-	os.remove("saved_game.py")
-	start()
-		
-def is_file():
-	return os.path.isfile('./saved_game.py')
-
-def quit_game():
-	user_choice = {1: save_game, 2: quit}
-	print("Oh you are leaving us now?. We hope we'll see you soon.")
-	print("Would you like to: ")
-	print("1. Test if the student can create a 'save file'.")
-	print("2. Test if the student can break other things than his leg, i.e a loop.")
-	selection = input("Please select 1 to save the game or 2 to quit. ")
-	try:
-		choice = int(selection)
-	except ValueError:
-		print("Please focus and select a valid option. Try again... ")
-		return selection
-	if choice > 2:
-		print("Please focus and select a valid option. Try again... ")
-		return selection
-	return user_choice[choice]()
-	
-
-def options():
-    print("There is a saved game file available. Would you like to: ")
-    print("1. Load that game, I was on fire... ")
-    print("2. I need a fresh start in my life, delete it and load a new game. ")
-    print("3. Ask me again next time, just start a new game for now. ")
-    choice = input("Please select one option: 1 2 3  ")
-    try:
-        return int(choice)
-    except ValueError:
-        print('That is not a valid option. Please try again. ')
-        return choice
-        
-def choice(choices):
-	selected = {1: load_game ,2: delete_start ,3: start}
-	return selected[choices]()
-
-        
+  
 def start():
 	"""Plays the Three Musketeers Game."""
-	choice(options())
-	global users_side
 	users_side = choose_users_side()
 	board = create_board()
 	print_instructions()
@@ -415,7 +416,7 @@ def start():
 		else:
 			print("The Musketeers win!")
 			break
-			
+
 if is_file():
 	choice(options())
 if __name__ == '__main__':
