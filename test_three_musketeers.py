@@ -59,11 +59,13 @@ def test_create_board():
     
 def test_set_board():
     '''Test that set board replaces the current board and returns the correct object'''
-    first_board = get_board(board1)
+    set_board(board1)
+    first_board = get_board()
     assert first_board[0][0] == _
     assert first_board[0][3] == M
     assert first_board[2][1] == R
-    second_board = set_board(board2)
+    set_board(board2)
+    second_board = get_board()
     assert second_board[0][0] == _
     assert second_board[0][3] == M
     assert second_board[2][1] == R
@@ -71,12 +73,14 @@ def test_set_board():
 
 def test_get_board():
     '''Test that the functions return an appropiated object i.e type and length'''
-    board = get_board(board1)
+    set_board(board1)
+    board = get_board()
     assert len(board) == 5
     assert board == board1 and board != board2
     assert isinstance(board,list)
     assert type(board) != str
-    board_two = get_board(board2)
+    set_board(board2)
+    board_two = get_board()
     assert board != board_two
     
 def test_string_to_location():
