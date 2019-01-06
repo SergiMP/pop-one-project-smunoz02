@@ -416,6 +416,7 @@ def start():
 			print("The Musketeers win!")
 			break
 			
-
+if is_file():
+	choice(options())
 if __name__ == '__main__':
 	start()
