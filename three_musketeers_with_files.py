@@ -389,13 +389,11 @@ def options():
 def choice(choices):
 	selected = {1: load_game ,2: delete_start ,3: start}
 	return selected[choices]()
-        
-def test():
-	global users_side
-	return users_side
+
         
 def start():
 	"""Plays the Three Musketeers Game."""
+	choice(options())
 	global users_side
 	users_side = choose_users_side()
 	board = create_board()
@@ -418,8 +416,6 @@ def start():
 			print("The Musketeers win!")
 			break
 			
-if is_file():
-	choice(options())
-else:
-	if __name__ == '__main__':
-		start()
+
+if __name__ == '__main__':
+	start()
