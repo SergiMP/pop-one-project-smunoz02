@@ -364,3 +364,5 @@ def start():
 			print("The Musketeers win!")
 			break
 
+if __name__ == '__main__':
+	start()
