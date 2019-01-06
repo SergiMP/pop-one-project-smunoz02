@@ -348,6 +348,10 @@ def load_game():
 	with open('saved_game.py','rb') as data:
 		board = pickle.load(data)
 	start()
+	
+def delete_start():
+	os.remove("saved_game.py")
+	start()
 		
 def is_file():
 	return os.path.isfile('./saved_game.py')
@@ -415,7 +419,7 @@ def start():
 			break
 			
 if is_file():
-	choices(options())
+	choice(options())
 else:
 	if __name__ == '__main__':
 		start()
