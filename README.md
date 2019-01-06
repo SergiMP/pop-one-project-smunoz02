@@ -2,11 +2,12 @@
 
 Project for POP I assignment.
 
-I have been working regularly on the project for the past three weeks whenever work and family commitments allowed.
 When pushing the code to GITHUB I realized that my previous GITHUB account has been linked to the one for the project.
 I have seen in the forum that this can happen and that is ok, but in case there is an issue please let me know.
 
-The first part of the assignment is completed and passes all the test.
+The first part of the assignment is completed and passes all the test created. 
+
+As explained in the forum I completely missed the requirement to do regular commits and I kept working on the file locally, we understand that the requirements were made clear and that the lack of regular commitments will affect the grade of the first part.
 
 For the second part where we have to  implement a "Save status" we have created the options and the file with the information stored, but we haven't managed to upload the status to the new game.
 
